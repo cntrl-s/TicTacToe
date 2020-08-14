@@ -19,19 +19,21 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		TicTacToe game = new TicTacToe();
-		game.displayGameBoard();
+		GamePlay play = new GamePlay();
+		GameUI gameBoard = play.getGameUI();
+		gameBoard.displayGameBoard();
 
 		while (true) {
 			//handle numformatexcept
 			int player1CurrentPosition = Integer.valueOf(scanner.nextLine());
-			boolean keepPlaying = game.makeMove(player1CurrentPosition, false);
-			game.displayGameBoard();
+			boolean keepPlaying = play.makeMove(player1CurrentPosition, false);
+			gameBoard.displayGameBoard();
 			if (!keepPlaying) return;
-			int computerCurrentPosition = game.generateComputerMove();
+
+			int computerCurrentPosition = play.generateComputerMove();
 			//to do stop after player1 wins (no error) debug to check
-			keepPlaying = game.makeMove(computerCurrentPosition, true);
-			game.displayGameBoard();
+			keepPlaying = play.makeMove(computerCurrentPosition, true);
+			gameBoard.displayGameBoard();
 			if (!keepPlaying) return;
 		}
 	}

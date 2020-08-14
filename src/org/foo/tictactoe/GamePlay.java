@@ -3,30 +3,18 @@ package org.foo.tictactoe;
 import java.util.HashSet;
 import java.util.Random;
 
-public class TicTacToe {
+public class GamePlay {
 	private static final int MIN_NUM_OF_MOVES = 5;
-	HashSet<Integer> player1Moves = new HashSet<>();
-	HashSet<Integer> computerMoves = new HashSet<>();
-	private HashSet<Integer> allMoves = new HashSet<>();
 	private final int[][] winningMoves = { 
 			{1, 2, 3}, {1, 4, 7}, {1, 5, 9}, {2, 5, 8}, {3, 5, 7}, {3, 6, 9}, {4, 5, 6}, {7, 8, 9}
 	};
-	private char xOrO = ' ';
-	private char[][] gameBoard = { 
-			//1 ,  2 , 3 ,  4 ,  5
-			{' ', '|', ' ', '|', ' '},
-			{'-', '+', '-', '+', '-'},
-			{' ', '|', ' ', '|', ' '},
-			{'-', '+', '-', '+', '-'},
-			{' ', '|', ' ', '|', ' '},
-	};
+	private HashSet<Integer> player1Moves = new HashSet<>();
+	private HashSet<Integer> computerMoves = new HashSet<>();
+	private HashSet<Integer> allMoves = new HashSet<>();
+	private GameUI gameBoard = new GameUI();
 
-	public void displayGameBoard() {
-		System.out.println("Enter number b/w 1-9");
-		for (char[] cs : gameBoard) {
-			System.out.println(cs);
-		}
-		System.out.println();
+	public GameUI getGameUI() {
+		return gameBoard;
 	}
 
 	public boolean makeMove(Integer currentPosition, boolean computerTurn) {
@@ -34,9 +22,10 @@ public class TicTacToe {
 			System.out.println("Invalid move");
 			//go back static bool invalidMove
 		} else {
-			xOrO = computerTurn ? Main.COMP_X_OR_O : Main.PLAYER1_X_OR_O;
-			setPositionOnBoard(currentPosition);
+			gameBoard.setXorO(computerTurn ? Main.COMP_X_OR_O : Main.PLAYER1_X_OR_O);
+			gameBoard.setPositionOnBoard(currentPosition);
 			allMoves.add(currentPosition);
+
 			if (computerTurn) {
 				computerMoves.add(currentPosition);
 			} else {
@@ -46,32 +35,6 @@ public class TicTacToe {
 		return checkWinner();
 	}
 
-	public void setPositionOnBoard (int currentPosition) {
-		switch (currentPosition) {
-
-		case 1: gameBoard[0][0] = xOrO;
-		break;
-		case 2: gameBoard[0][2] = xOrO;
-		break;
-		case 3: gameBoard[0][4] = xOrO;
-		break;
-		case 4: gameBoard[2][0] = xOrO;
-		break;
-		case 5: gameBoard[2][2] = xOrO;
-		break;
-		case 6: gameBoard[2][4] = xOrO;
-		break;
-		case 7: gameBoard[4][0] = xOrO;
-		break;
-		case 8: gameBoard[4][2] = xOrO;
-		break;
-		case 9: gameBoard[4][4] = xOrO;
-		break;
-
-		default:
-			break;
-		}	
-	}
 
 	public int generateComputerMove() {
 		Random random = new Random();
