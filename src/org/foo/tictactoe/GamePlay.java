@@ -4,30 +4,28 @@ import java.util.HashSet;
 import java.util.Random;
 
 public class GamePlay {
-	private static final int MIN_NUM_OF_MOVES = 5;
 	private final int[][] winningMoves = { 
 			{1, 2, 3}, {1, 4, 7}, {1, 5, 9}, {2, 5, 8}, {3, 5, 7}, {3, 6, 9}, {4, 5, 6}, {7, 8, 9}
 	};
 	private HashSet<Integer> player1Moves = new HashSet<>();
-	private HashSet<Integer> computerMoves = new HashSet<>();
+	private HashSet<Integer> cpuMoves = new HashSet<>();
 	private HashSet<Integer> allMoves = new HashSet<>();
 	private GameUI gameBoard = new GameUI();
 
-	public GameUI getGameUI() {
+	public GameUI getGameBoard() {
 		return gameBoard;
 	}
 
-	public boolean makeMove(Integer currentPosition, boolean computerTurn) {
+	public int makeMove(Integer currentPosition, boolean cpuTurn) {
 		if (allMoves.contains(currentPosition) || !currentPosition.toString().matches("[1-9]{1}")) {
-			System.out.println("Invalid move");
-			//go back static bool invalidMove
+			return -1;
 		} else {
-			gameBoard.setXorO(computerTurn ? Main.COMP_X_OR_O : Main.PLAYER1_X_OR_O);
-			gameBoard.setPositionOnBoard(currentPosition);
+			gameBoard.setPlayerChar(cpuTurn ? Main.CPU_CHAR : Main.PLAYER1_CHAR);
+			gameBoard.showPositionOnBoard(currentPosition);
 			allMoves.add(currentPosition);
 
-			if (computerTurn) {
-				computerMoves.add(currentPosition);
+			if (cpuTurn) {
+				cpuMoves.add(currentPosition);
 			} else {
 				player1Moves.add(currentPosition);
 			}
@@ -35,48 +33,41 @@ public class GamePlay {
 		return checkWinner();
 	}
 
-
-	public int generateComputerMove() {
+	public int generateCpuMove() {
 		Random random = new Random();
-		int computerCurMove = 0;
 		while (true) {
 			int generatedMove = random.nextInt(9) + 1;
 			if (!allMoves.contains(generatedMove)) {
-				computerCurMove = generatedMove;
-				break;
+				return generatedMove;
 			} 
 		}
-		return computerCurMove;
 	}
 
-	public boolean checkWinner() {
-		if (allMoves.size() < MIN_NUM_OF_MOVES) {
-			return true;
-		}
+	public int checkWinner() {
 
 		for (int i = 0; i < winningMoves.length; i++) {
-			int player1MathcingMoveCount = 0;
-			int computerMatchingMoveCount = 0;
+			int player1WinningMoveCount = 0;
+			int cpuMatchingMoveCount = 0;
 
 			for (int j = 0; j < winningMoves[i].length ; j++) {
-				if (player1Moves.contains(winningMoves[i][j])) {
-					player1MathcingMoveCount++;
-				}
-				if (player1MathcingMoveCount == 3) {
-					System.out.println("player1 wins");
-					return false;
+				if (player1Moves.contains(winningMoves[i][j]) && player1Moves.size() >= 3) {
+					player1WinningMoveCount++;
+
+					if (player1WinningMoveCount == 3) {
+						return 0;
+					}
 				}//player1
 
-				if (computerMoves.contains(winningMoves[i][j])) {
-					computerMatchingMoveCount++;
-				}
-				if (computerMatchingMoveCount == 3) {
-					System.out.println("computer wins");
-					return false;
-				}//computer
+				if (cpuMoves.contains(winningMoves[i][j]) && cpuMoves.size() >= 3) {
+					cpuMatchingMoveCount++;
+
+					if (cpuMatchingMoveCount == 3) {
+						return 0;
+					}
+				}//cpu
 			}
 		}
 		//to do tie
-		return true;
+		return 1;
 	}
 }

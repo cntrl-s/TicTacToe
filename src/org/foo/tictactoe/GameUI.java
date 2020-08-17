@@ -3,7 +3,6 @@ package org.foo.tictactoe;
 public class GameUI {
 	private char xOrO = ' ';
 	private char[][] gameBoard = { 
-			//1 ,  2 , 3 ,  4 ,  5
 			{' ', '|', ' ', '|', ' '},
 			{'-', '+', '-', '+', '-'},
 			{' ', '|', ' ', '|', ' '},
@@ -11,7 +10,7 @@ public class GameUI {
 			{' ', '|', ' ', '|', ' '},
 	};
 
-	public void setXorO(char xOrO) {
+	public void setPlayerChar(char xOrO) {
 		this.xOrO = xOrO;
 	}
 
@@ -23,7 +22,7 @@ public class GameUI {
 		System.out.println();
 	}
 
-	public void setPositionOnBoard(Integer currentPosition) {
+	public void showPositionOnBoard(Integer currentPosition) {
 		switch (currentPosition) {
 
 		case 1: gameBoard[0][0] = this.xOrO;

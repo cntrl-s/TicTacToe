@@ -4,37 +4,43 @@ import java.util.Scanner;
 
 public class Main {
 	static Scanner scanner = new Scanner(System.in);
-	static final char PLAYER1_X_OR_O = getPlayerChar();
-	static final char COMP_X_OR_O = PLAYER1_X_OR_O == 'x' ? 'o' : 'x';
+	static final char PLAYER1_CHAR = getPlayerChar();
+	static final char CPU_CHAR = PLAYER1_CHAR == 'x' ? 'o' : 'x';
 
 	private static char getPlayerChar() {
-		char xOrO;
 		while (true) {
 			System.out.println("Type x or o");
-			xOrO = scanner.nextLine().toLowerCase().trim().charAt(0);
+			char xOrO = scanner.nextLine().toLowerCase().trim().charAt(0);
 			if (xOrO == 'x' || xOrO == 'o')
-				break;
+				return xOrO;
 		}
-		return xOrO;
 	}
 
 	public static void main(String[] args) {
 		GamePlay play = new GamePlay();
-		GameUI gameBoard = play.getGameUI();
+		GameUI gameBoard = play.getGameBoard();
 		gameBoard.displayGameBoard();
 
 		while (true) {
 			//handle numformatexcept
 			int player1CurrentPosition = Integer.valueOf(scanner.nextLine());
-			boolean keepPlaying = play.makeMove(player1CurrentPosition, false);
+			int gameStatus = play.makeMove(player1CurrentPosition, false);
 			gameBoard.displayGameBoard();
-			if (!keepPlaying) return;
+			if (gameStatus == 0) {
+				System.out.println("player 1 wins!");
+				return;
+			} else if (gameStatus == -1) {
+				System.out.println("invalid move");
+				continue;
+			}
 
-			int computerCurrentPosition = play.generateComputerMove();
-			//to do stop after player1 wins (no error) debug to check
-			keepPlaying = play.makeMove(computerCurrentPosition, true);
+			int cpuCurrentPosition = play.generateCpuMove();
+			gameStatus = play.makeMove(cpuCurrentPosition, true);
 			gameBoard.displayGameBoard();
-			if (!keepPlaying) return;
+			if (gameStatus == 0) {
+				System.out.println("cpu wins!");
+				return;
+			}
 		}
 	}
 }
