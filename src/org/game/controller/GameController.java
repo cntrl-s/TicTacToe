@@ -1,11 +1,14 @@
-package org.foo.tictactoe;
+package org.game.controller;
 
 import java.util.Scanner;
 
-public class Main {
+import org.game.model.GameModel;
+import org.game.view.GameView;
+
+public class GameController {
 	static Scanner scanner = new Scanner(System.in);
-	static final char PLAYER1_CHAR = getPlayerChar();
-	static final char CPU_CHAR = PLAYER1_CHAR == 'x' ? 'o' : 'x';
+	public static final char PLAYER1_CHAR = getPlayerChar();
+	public static final char CPU_CHAR = PLAYER1_CHAR == 'x' ? 'o' : 'x';
 
 	private static char getPlayerChar() {
 		while (true) {
@@ -17,8 +20,8 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		GamePlay play = new GamePlay();
-		GameUI gameBoard = play.getGameBoard();
+		GameModel play = new GameModel();
+		GameView gameBoard = play.getGameBoard();
 		gameBoard.displayGameBoard();
 
 		while (true) {

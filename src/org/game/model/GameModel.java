@@ -1,18 +1,21 @@
-package org.foo.tictactoe;
+package org.game.model;
 
 import java.util.HashSet;
 import java.util.Random;
 
-public class GamePlay {
+import org.game.controller.GameController;
+import org.game.view.GameView;
+
+public class GameModel {
 	private final int[][] winningMoves = { 
 			{1, 2, 3}, {1, 4, 7}, {1, 5, 9}, {2, 5, 8}, {3, 5, 7}, {3, 6, 9}, {4, 5, 6}, {7, 8, 9}
 	};
 	private HashSet<Integer> player1Moves = new HashSet<>();
 	private HashSet<Integer> cpuMoves = new HashSet<>();
 	private HashSet<Integer> allMoves = new HashSet<>();
-	private GameUI gameBoard = new GameUI();
+	private GameView gameBoard = new GameView();
 
-	public GameUI getGameBoard() {
+	public GameView getGameBoard() {
 		return gameBoard;
 	}
 
@@ -20,7 +23,7 @@ public class GamePlay {
 		if (allMoves.contains(currentPosition) || !currentPosition.toString().matches("[1-9]{1}")) {
 			return -1;
 		} else {
-			gameBoard.setPlayerChar(cpuTurn ? Main.CPU_CHAR : Main.PLAYER1_CHAR);
+			gameBoard.setPlayerChar(cpuTurn ? GameController.CPU_CHAR : GameController.PLAYER1_CHAR);
 			gameBoard.showPositionOnBoard(currentPosition);
 			allMoves.add(currentPosition);
 

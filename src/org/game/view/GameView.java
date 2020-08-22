@@ -1,6 +1,6 @@
-package org.foo.tictactoe;
+package org.game.view;
 
-public class GameUI {
+public class GameView {
 	private char xOrO = ' ';
 	private char[][] gameBoard = { 
 			{' ', '|', ' ', '|', ' '},
