@@ -6,29 +6,29 @@ import org.game.model.GameModel;
 import org.game.view.GameView;
 
 public class GameController {
-	static Scanner scanner = new Scanner(System.in);
-	public static final char PLAYER1_CHAR = getPlayerChar();
-	public static final char CPU_CHAR = PLAYER1_CHAR == 'x' ? 'o' : 'x';
-
-	private static char getPlayerChar() {
-		while (true) {
-			System.out.println("Type x or o");
-			char xOrO = scanner.nextLine().toLowerCase().trim().charAt(0);
-			if (xOrO == 'x' || xOrO == 'o')
-				return xOrO;
-		}
+	private Scanner scanner;
+	private GameModel play;
+	private GameView gameBoard;
+	
+	public GameController(GameModel play, GameView gameBoard) {
+		this.play = play;
+		this.gameBoard = gameBoard;
+		this.scanner = new Scanner(System.in);
 	}
 
-	public static void main(String[] args) {
-		GameModel play = new GameModel();
-		GameView gameBoard = play.getGameBoard();
+	public void start() {
 		gameBoard.displayGameBoard();
 
 		while (true) {
 			//handle numformatexcept
 			int player1CurrentPosition = Integer.valueOf(scanner.nextLine());
-			int gameStatus = play.makeMove(player1CurrentPosition, false);
+
+			boolean cpuTurn = false;
+			int gameStatus = play.makeMove(player1CurrentPosition, cpuTurn);
+			gameBoard.setPlayerChar(cpuTurn);
+			gameBoard.showPositionOnBoard(player1CurrentPosition);
 			gameBoard.displayGameBoard();
+
 			if (gameStatus == 0) {
 				System.out.println("player 1 wins!");
 				return;
@@ -38,8 +38,13 @@ public class GameController {
 			}
 
 			int cpuCurrentPosition = play.generateCpuMove();
-			gameStatus = play.makeMove(cpuCurrentPosition, true);
+
+			cpuTurn = true;
+			gameStatus = play.makeMove(cpuCurrentPosition, cpuTurn);
+			gameBoard.setPlayerChar(cpuTurn);
+			gameBoard.showPositionOnBoard(cpuCurrentPosition);
 			gameBoard.displayGameBoard();
+
 			if (gameStatus == 0) {
 				System.out.println("cpu wins!");
 				return;

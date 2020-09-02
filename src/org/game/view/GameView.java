@@ -1,7 +1,14 @@
 package org.game.view;
 
+import java.util.Scanner;
+
 public class GameView {
+	private static Scanner scanner;
+
 	private char xOrO = ' ';
+	private char playerChar;
+	private char cpuChar;
+
 	private char[][] gameBoard = { 
 			{' ', '|', ' ', '|', ' '},
 			{'-', '+', '-', '+', '-'},
@@ -9,9 +16,32 @@ public class GameView {
 			{'-', '+', '-', '+', '-'},
 			{' ', '|', ' ', '|', ' '},
 	};
+	
+	public GameView(Scanner scanner) {
+		GameView.scanner = scanner;
+		this.playerChar = getPlayerChar();
+		this.cpuChar = getCpuChar();
+	}
+	
+	private char getCpuChar() {
+		return playerChar == 'x' ? 'o' : 'x';
+	}
 
-	public void setPlayerChar(char xOrO) {
+	private static char getPlayerChar() {
+		while (true) {
+			System.out.println("Type x or o");
+			char xOrO = scanner.nextLine().toLowerCase().trim().charAt(0);
+			if (xOrO == 'x' || xOrO == 'o')
+				return xOrO;
+		}
+	}
+	
+	void setPlayerChar(char xOrO) {
 		this.xOrO = xOrO;
+	}
+	
+	public void setPlayerChar(boolean playerTurn) {
+		this.xOrO = playerTurn ? this.playerChar : this.cpuChar;
 	}
 
 	public void displayGameBoard() {
