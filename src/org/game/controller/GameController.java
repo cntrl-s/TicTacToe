@@ -9,7 +9,7 @@ public class GameController {
 	private Scanner scanner;
 	private GameModel play;
 	private GameView gameBoard;
-	
+
 	public GameController(GameModel play, GameView gameBoard) {
 		this.play = play;
 		this.gameBoard = gameBoard;
@@ -20,14 +20,12 @@ public class GameController {
 		gameBoard.displayGameBoard();
 
 		while (true) {
+			// move to view
 			//handle numformatexcept
 			int player1CurrentPosition = Integer.valueOf(scanner.nextLine());
 
 			boolean cpuTurn = false;
 			int gameStatus = play.makeMove(player1CurrentPosition, cpuTurn);
-			gameBoard.setPlayerChar(cpuTurn);
-			gameBoard.showPositionOnBoard(player1CurrentPosition);
-			gameBoard.displayGameBoard();
 
 			if (gameStatus == 0) {
 				System.out.println("player 1 wins!");
@@ -35,6 +33,10 @@ public class GameController {
 			} else if (gameStatus == -1) {
 				System.out.println("invalid move");
 				continue;
+			} else {
+				gameBoard.setPlayerChar(cpuTurn);
+				gameBoard.showPositionOnBoard(player1CurrentPosition);
+				gameBoard.displayGameBoard();
 			}
 
 			int cpuCurrentPosition = play.generateCpuMove();

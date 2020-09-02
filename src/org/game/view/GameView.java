@@ -3,7 +3,7 @@ package org.game.view;
 import java.util.Scanner;
 
 public class GameView {
-	private static Scanner scanner;
+	private Scanner scanner;
 
 	private char xOrO = ' ';
 	private char playerChar;
@@ -18,7 +18,7 @@ public class GameView {
 	};
 	
 	public GameView(Scanner scanner) {
-		GameView.scanner = scanner;
+		this.scanner = scanner;
 		this.playerChar = getPlayerChar();
 		this.cpuChar = getCpuChar();
 	}
@@ -27,17 +27,13 @@ public class GameView {
 		return playerChar == 'x' ? 'o' : 'x';
 	}
 
-	private static char getPlayerChar() {
+	private char getPlayerChar() {
 		while (true) {
 			System.out.println("Type x or o");
 			char xOrO = scanner.nextLine().toLowerCase().trim().charAt(0);
 			if (xOrO == 'x' || xOrO == 'o')
 				return xOrO;
 		}
-	}
-	
-	void setPlayerChar(char xOrO) {
-		this.xOrO = xOrO;
 	}
 	
 	public void setPlayerChar(boolean playerTurn) {
