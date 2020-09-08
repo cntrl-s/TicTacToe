@@ -6,8 +6,8 @@ public class GameBoard {
 	private Scanner scanner;
 
 	private char xOrO = ' ';
-	private char playerChar;
-	private char cpuChar;
+	private final char playerChar;
+	private final char cpuChar;
 
 	private char[][] gameBoard = { 
 			{' ', '|', ' ', '|', ' '},
@@ -24,7 +24,7 @@ public class GameBoard {
 	}
 	
 	private char getCpuChar() {
-		return playerChar == 'x' ? 'o' : 'x';
+		return this.playerChar == 'x' ? 'o' : 'x';
 	}
 
 	private char getPlayerChar() {
@@ -36,15 +36,17 @@ public class GameBoard {
 		}
 	}
 	
-	public void setPlayerChar(boolean playerTurn) {
-		this.xOrO = playerTurn ? this.playerChar : this.cpuChar;
+	public void setPlayerChar(boolean cpuTurn) {
+		this.xOrO = cpuTurn ? this.cpuChar : this.playerChar ;
 	}
 
 	public void displayGameBoard() {
 		System.out.println("Enter number b/w 1-9");
+
 		for (char[] cs : gameBoard) {
 			System.out.println(cs);
 		}
+
 		System.out.println();
 	}
 
