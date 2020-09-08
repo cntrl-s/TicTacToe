@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
-import org.game.controller.GameController;
-import org.game.model.GameModel;
-import org.game.view.GameBoard;
+import org.tictac.controller.GameController;
+import org.tictac.model.GameModel;
+import org.tictac.view.GameBoard;
 
 public class TicTacToe {
 

@@ -1,4 +1,4 @@
-package org.game.view;
+package org.tictac.view;
 
 import java.util.Scanner;
 

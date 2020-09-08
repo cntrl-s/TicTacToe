@@ -1,9 +1,9 @@
-package org.game.controller;
+package org.tictac.controller;
 
 import java.util.Scanner;
 
-import org.game.model.GameModel;
-import org.game.view.GameBoard;
+import org.tictac.model.GameModel;
+import org.tictac.view.GameBoard;
 
 public class GameController {
 	private Scanner scanner;

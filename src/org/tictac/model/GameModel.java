@@ -1,4 +1,4 @@
-package org.game.model;
+package org.tictac.model;
 
 import java.util.HashSet;
 import java.util.Random;
