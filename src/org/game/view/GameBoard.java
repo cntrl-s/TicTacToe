@@ -2,7 +2,7 @@ package org.game.view;
 
 import java.util.Scanner;
 
-public class GameView {
+public class GameBoard {
 	private Scanner scanner;
 
 	private char xOrO = ' ';
@@ -17,7 +17,7 @@ public class GameView {
 			{' ', '|', ' ', '|', ' '},
 	};
 	
-	public GameView(Scanner scanner) {
+	public GameBoard(Scanner scanner) {
 		this.scanner = scanner;
 		this.playerChar = getPlayerChar();
 		this.cpuChar = getCpuChar();

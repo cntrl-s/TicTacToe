@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 import org.game.controller.GameController;
 import org.game.model.GameModel;
-import org.game.view.GameView;
+import org.game.view.GameBoard;
 
 public class TicTacToe {
 
@@ -10,7 +10,7 @@ public class TicTacToe {
 		Scanner scanner = new Scanner(System.in);
 		
 		GameModel play = new GameModel();
-		GameView gameBoard = new GameView(scanner);
+		GameBoard gameBoard = new GameBoard(scanner);
 		GameController controller = new GameController(play, gameBoard);
 		
 		controller.start();

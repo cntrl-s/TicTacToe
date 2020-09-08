@@ -3,14 +3,14 @@ package org.game.controller;
 import java.util.Scanner;
 
 import org.game.model.GameModel;
-import org.game.view.GameView;
+import org.game.view.GameBoard;
 
 public class GameController {
 	private Scanner scanner;
 	private GameModel play;
-	private GameView gameBoard;
+	private GameBoard gameBoard;
 
-	public GameController(GameModel play, GameView gameBoard) {
+	public GameController(GameModel play, GameBoard gameBoard) {
 		this.play = play;
 		this.gameBoard = gameBoard;
 		this.scanner = new Scanner(System.in);
