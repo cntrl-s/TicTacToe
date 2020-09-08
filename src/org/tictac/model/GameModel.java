@@ -1,39 +1,43 @@
 package org.tictac.model;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class GameModel {
-	private final int[][] winningMoves = { 
-			{1, 2, 3}, {1, 4, 7}, {1, 5, 9}, {2, 5, 8}, {3, 5, 7}, {3, 6, 9}, {4, 5, 6}, {7, 8, 9}
-	};
 	private final int PLAYER_WINS = 0;
-	private HashSet<Integer> player1Moves = new HashSet<>();
-	private HashSet<Integer> cpuMoves = new HashSet<>();
-	private HashSet<Integer> allMoves = new HashSet<>();
+
+	private final int[][] winningMoves = { {1, 2, 3}, {1, 4, 7}, {1, 5, 9}, {2, 5, 8}, 
+			{3, 5, 7}, {3, 6, 9}, {4, 5, 6}, {7, 8, 9} };
+
+	private List<Integer> player1Moves = new ArrayList<>();
+	private List<Integer> cpuMoves = new ArrayList<>();
+	private List<Integer> allMoves = new ArrayList<>();
 
 	// to do undo
 	// return val 0 : win , -1 : error, 1 : tie
 	public int makeMove(Integer currentPosition, boolean cpuTurn) {
 		if (allMoves.contains(currentPosition) || !currentPosition.toString().matches("[1-9]{1}")) {
 			return -1;
-		} else {
-
-			allMoves.add(currentPosition);
-
-			if (cpuTurn) {
-				cpuMoves.add(currentPosition);
-			} else {
-				player1Moves.add(currentPosition);
-			}
 		}
+
+		allMoves.add(currentPosition);
+
+		if (cpuTurn) {
+			cpuMoves.add(currentPosition);
+		} else {
+			player1Moves.add(currentPosition);
+		}
+
 		return checkWinner();
 	}
 
 	public int generateCpuMove() {
 		Random random = new Random();
+
 		while (true) {
 			int generatedMove = random.nextInt(9) + 1;
+
 			if (!allMoves.contains(generatedMove)) {
 				return generatedMove;
 			} 
@@ -58,7 +62,7 @@ public class GameModel {
 				return PLAYER_WINS;
 			}
 		}
-		//to do tie
+		//to do tie -> moves size == 9
 		return 1;
 	}
 }

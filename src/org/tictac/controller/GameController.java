@@ -20,14 +20,16 @@ public class GameController {
 		gameBoard.displayGameBoard();
 
 		while (true) {
-			// move to view
 			//handle numformatexcept
-			int player1CurrentPosition = Integer.valueOf(scanner.nextLine());
+			int player1Move = Integer.valueOf(scanner.nextLine());
 
 			boolean cpuTurn = false;
-			int gameStatus = play.makeMove(player1CurrentPosition, cpuTurn);
+			int gameStatus = play.makeMove(player1Move, cpuTurn);
 
 			if (gameStatus == 0) {
+				gameBoard.setPlayerChar(cpuTurn);
+				gameBoard.showPositionOnBoard(player1Move);
+				gameBoard.displayGameBoard();
 				System.out.println("player 1 wins!");
 				return;
 			} else if (gameStatus == -1) {
@@ -35,19 +37,20 @@ public class GameController {
 				continue;
 			} else {
 				gameBoard.setPlayerChar(cpuTurn);
-				gameBoard.showPositionOnBoard(player1CurrentPosition);
+				gameBoard.showPositionOnBoard(player1Move);
 				gameBoard.displayGameBoard();
 			}
 
-			int cpuCurrentPosition = play.generateCpuMove();
+			int cpuMove = play.generateCpuMove();
 
 			cpuTurn = true;
-			gameStatus = play.makeMove(cpuCurrentPosition, cpuTurn);
+			gameStatus = play.makeMove(cpuMove, cpuTurn);
 			gameBoard.setPlayerChar(cpuTurn);
-			gameBoard.showPositionOnBoard(cpuCurrentPosition);
+			gameBoard.showPositionOnBoard(cpuMove);
 			gameBoard.displayGameBoard();
 
 			if (gameStatus == 0) {
+				gameBoard.displayGameBoard();
 				System.out.println("cpu wins!");
 				return;
 			}
