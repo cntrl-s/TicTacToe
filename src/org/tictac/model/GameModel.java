@@ -7,6 +7,7 @@ public class GameModel {
 	private final int[][] winningMoves = { 
 			{1, 2, 3}, {1, 4, 7}, {1, 5, 9}, {2, 5, 8}, {3, 5, 7}, {3, 6, 9}, {4, 5, 6}, {7, 8, 9}
 	};
+	private final int PLAYER_WINS = 0;
 	private HashSet<Integer> player1Moves = new HashSet<>();
 	private HashSet<Integer> cpuMoves = new HashSet<>();
 	private HashSet<Integer> allMoves = new HashSet<>();
@@ -42,25 +43,19 @@ public class GameModel {
 	public int checkWinner() {
 
 		for (int i = 0; i < winningMoves.length; i++) {
-			int player1WinningMoveCount = 0;
-			int cpuMatchingMoveCount = 0;
 
-			for (int j = 0; j < winningMoves[i].length ; j++) {
-				if (player1Moves.size() >= 3 && player1Moves.contains(winningMoves[i][j]) ) {
-					player1WinningMoveCount++;
+			if (player1Moves.size() >= 3
+					&& player1Moves.contains(winningMoves[i][0]) 
+					&& player1Moves.contains(winningMoves[i][1])
+					&& player1Moves.contains(winningMoves[i][2])) {
+				return PLAYER_WINS;
+			}
 
-					if (player1WinningMoveCount == 3) {
-						return 0;
-					}
-				}//player1
-
-				if (cpuMoves.size() >= 3 && cpuMoves.contains(winningMoves[i][j]) ) {
-					cpuMatchingMoveCount++;
-
-					if (cpuMatchingMoveCount == 3) {
-						return 0;
-					}
-				}//cpu
+			if (cpuMoves.size() >= 3 
+					&& cpuMoves.contains(winningMoves[i][0])
+					&& cpuMoves.contains(winningMoves[i][1])
+					&& cpuMoves.contains(winningMoves[i][2])) {
+				return PLAYER_WINS;
 			}
 		}
 		//to do tie
