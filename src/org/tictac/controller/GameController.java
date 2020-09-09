@@ -17,7 +17,7 @@ public class GameController {
 	}
 
 	public void start() {
-		gameBoard.displayGameBoard();
+		gameBoard.printGameBoard();
 
 		while (true) {
 			//handle numformatexcept
@@ -33,7 +33,7 @@ public class GameController {
 
 			gameBoard.setCurrentChar(cpuTurn);
 			gameBoard.markPosition(player1Move);
-			gameBoard.displayGameBoard();
+			gameBoard.printGameBoard();
 
 			if (gameStatus == 0) {
 				System.out.println("player 1 wins!");
@@ -47,10 +47,10 @@ public class GameController {
 
 			gameBoard.setCurrentChar(cpuTurn);
 			gameBoard.markPosition(cpuMove);
-			gameBoard.displayGameBoard();
+			gameBoard.printGameBoard();
 
 			if (gameStatus == 0) {
-				gameBoard.displayGameBoard();
+				gameBoard.printGameBoard();
 				System.out.println("cpu wins!");
 				return;
 			}
