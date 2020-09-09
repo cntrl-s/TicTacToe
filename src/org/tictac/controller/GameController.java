@@ -26,27 +26,27 @@ public class GameController {
 			boolean cpuTurn = false;
 			int gameStatus = play.makeMove(player1Move, cpuTurn);
 
-			if (gameStatus == 0) {
-				gameBoard.setPlayerChar(cpuTurn);
-				gameBoard.showPositionOnBoard(player1Move);
-				gameBoard.displayGameBoard();
-				System.out.println("player 1 wins!");
-				return;
-			} else if (gameStatus == -1) {
+			if (gameStatus == -1) {
 				System.out.println("invalid move");
 				continue;
-			} else {
-				gameBoard.setPlayerChar(cpuTurn);
-				gameBoard.showPositionOnBoard(player1Move);
-				gameBoard.displayGameBoard();
-			}
+			} 
+
+			gameBoard.setCurrentChar(cpuTurn);
+			gameBoard.markPosition(player1Move);
+			gameBoard.displayGameBoard();
+
+			if (gameStatus == 0) {
+				System.out.println("player 1 wins!");
+				return;
+			} 
 
 			int cpuMove = play.generateCpuMove();
 
 			cpuTurn = true;
 			gameStatus = play.makeMove(cpuMove, cpuTurn);
-			gameBoard.setPlayerChar(cpuTurn);
-			gameBoard.showPositionOnBoard(cpuMove);
+
+			gameBoard.setCurrentChar(cpuTurn);
+			gameBoard.markPosition(cpuMove);
 			gameBoard.displayGameBoard();
 
 			if (gameStatus == 0) {

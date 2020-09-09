@@ -48,14 +48,14 @@ public class GameModel {
 
 		for (int i = 0; i < winningMoves.length; i++) {
 
-			if (player1Moves.size() >= 3
+			if (player1Moves.size() > 2
 					&& player1Moves.contains(winningMoves[i][0]) 
 					&& player1Moves.contains(winningMoves[i][1])
 					&& player1Moves.contains(winningMoves[i][2])) {
 				return PLAYER_WINS;
 			}
 
-			if (cpuMoves.size() >= 3 
+			if (cpuMoves.size() > 2 
 					&& cpuMoves.contains(winningMoves[i][0])
 					&& cpuMoves.contains(winningMoves[i][1])
 					&& cpuMoves.contains(winningMoves[i][2])) {
