@@ -17,8 +17,9 @@ public class GameModel {
 	// to do undo
 	// return val 0 : win , -1 : error, 1 : tie
 	public int makeMove(Integer currentPosition, boolean cpuTurn) {
+		String inputValidationRegex = "[1-9]{1}";
 		if (allMoves.contains(currentPosition) 
-				|| !currentPosition.toString().matches("[1-9]{1}")) {
+				|| !currentPosition.toString().matches(inputValidationRegex)) {
 			return -1;
 		}
 
