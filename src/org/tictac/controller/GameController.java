@@ -2,20 +2,20 @@ package org.tictac.controller;
 
 import java.util.Scanner;
 
-import org.tictac.model.GameModel;
+import org.tictac.util.GameUtil;
 import org.tictac.view.GameBoard;
 
 public class GameController {
 	private Scanner scanner;
-	private GameModel play;
+	private GameUtil gameUtil;
 	private GameBoard gameBoard;
 
-	public GameController(GameModel play, GameBoard gameBoard) {
-		this.play = play;
+	public GameController(Scanner scanner, GameUtil util, GameBoard gameBoard) {
+		this.scanner = scanner;
+		this.gameUtil = util;
 		this.gameBoard = gameBoard;
-		this.scanner = new Scanner(System.in);
 	}
-
+	
 	public void start() {
 		gameBoard.printGameBoard();
 
@@ -24,7 +24,7 @@ public class GameController {
 			int player1Move = Integer.valueOf(scanner.nextLine());
 
 			boolean cpuTurn = false;
-			int gameStatus = play.makeMove(player1Move, cpuTurn);
+			int gameStatus = gameUtil.makeMove(player1Move, cpuTurn);
 
 			if (gameStatus == -1) {
 				System.out.println("invalid move");
@@ -40,10 +40,10 @@ public class GameController {
 				return;
 			} 
 
-			int cpuMove = play.generateCpuMove();
+			int cpuMove = gameUtil.generateCpuMove();
 
 			cpuTurn = true;
-			gameStatus = play.makeMove(cpuMove, cpuTurn);
+			gameStatus = gameUtil.makeMove(cpuMove, cpuTurn);
 
 			gameBoard.setCurrentChar(cpuTurn);
 			gameBoard.markPosition(cpuMove);
