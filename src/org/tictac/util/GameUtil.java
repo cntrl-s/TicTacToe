@@ -1,10 +1,10 @@
-package org.tictac.model;
+package org.tictac.util;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class GameModel {
+public class GameUtil {
 	private final int PLAYER_WINS = 0;
 
 	private final int[][] winningMoves = { {1, 2, 3}, {1, 4, 7}, {1, 5, 9}, {2, 5, 8}, 
@@ -16,19 +16,20 @@ public class GameModel {
 
 	// to do undo
 	// return val 0 : win , -1 : error, 1 : tie
-	public int makeMove(Integer currentPosition, boolean cpuTurn) {
+	public int makeMove(Integer currentMove, boolean cpuTurn) {
 		String inputValidationRegex = "[1-9]{1}";
-		if (allMoves.contains(currentPosition) 
-				|| !currentPosition.toString().matches(inputValidationRegex)) {
+		
+		if (allMoves.contains(currentMove) 
+				|| !currentMove.toString().matches(inputValidationRegex)) {
 			return -1;
 		}
 
-		allMoves.add(currentPosition);
+		allMoves.add(currentMove);
 
 		if (cpuTurn) {
-			cpuMoves.add(currentPosition);
+			cpuMoves.add(currentMove);
 		} else {
-			player1Moves.add(currentPosition);
+			player1Moves.add(currentMove);
 		}
 
 		return checkWinner();
