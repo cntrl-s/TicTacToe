@@ -16,8 +16,14 @@ public class GameController {
 		this.gameBoard = gameBoard;
 	}
 	
-	public void start() {
+	public void init() {
+		gameBoard.setPlayerChar();
+		gameBoard.setCpuChar();
+
 		gameBoard.printGameBoard();
+	}
+	
+	public void start() {
 
 		while (true) {
 			//handle numformatexcept

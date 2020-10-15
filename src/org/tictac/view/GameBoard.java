@@ -19,27 +19,27 @@ public class GameBoard {
 	
 	public GameBoard(Scanner scanner) {
 		this.scanner = scanner;
-		this.player = setPlayerChar();
-		this.cpu = setCpuChar();
 	}
 
-	private PlayerType setPlayerChar() {
+	public void setPlayerChar() {
 		while (true) {
 			System.out.println("Type x or o");
 			char playerChar = scanner.nextLine().toLowerCase().trim().charAt(0);
 
 			if (playerChar == 'x') {
-				return PlayerType.X;
+				this.player = PlayerType.X;
+				return;
 			}
 			
 			if (playerChar == 'o') {
-				return PlayerType.O;
+				this.player = PlayerType.O;
+				return;
 			}
 		}
 	}
 	
-	private PlayerType setCpuChar() {
-		return this.player == PlayerType.X ? PlayerType.O : PlayerType.X;
+	public void setCpuChar() {
+		this.cpu = this.player == PlayerType.X ? PlayerType.O : PlayerType.X;
 	}
 	
 	public void setCurrentChar(boolean cpuTurn) {
