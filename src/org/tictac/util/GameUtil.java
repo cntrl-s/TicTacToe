@@ -10,9 +10,15 @@ public class GameUtil {
 	private final int[][] winningMoves = { {1, 2, 3}, {1, 4, 7}, {1, 5, 9}, {2, 5, 8}, 
 			{3, 5, 7}, {3, 6, 9}, {4, 5, 6}, {7, 8, 9} };
 
-	private List<Integer> player1Moves = new ArrayList<>();
-	private List<Integer> cpuMoves = new ArrayList<>();
-	private List<Integer> allMoves = new ArrayList<>();
+	private List<Integer> player1Moves;
+	private List<Integer> cpuMoves;
+	private List<Integer> allMoves;
+	
+	public GameUtil() {
+		this.player1Moves = new ArrayList<>();
+		this.cpuMoves = new ArrayList<>();
+		this.allMoves = new ArrayList<>();
+	}
 
 	// to do -> undo
 	// return val 0 : win , -1 : error, 1 : tie
