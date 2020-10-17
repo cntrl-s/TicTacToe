@@ -8,7 +8,11 @@ import java.util.Scanner;
 import org.tictac.view.PlayerType;
 
 public class GameUtil {
-	private final int PLAYER_WINS = 0;
+	public final static int PLAYER_WINS = 1;
+	public final static int INVALID_MOVE = -1;
+	public final static int NOBODY_WINS = 0;
+	public final static int CONTINUE = 2;
+	
 	private final int[][] winningMoves = { {1, 2, 3}, {1, 4, 7}, {1, 5, 9}, {2, 5, 8}, 
 			{3, 5, 7}, {3, 6, 9}, {4, 5, 6}, {7, 8, 9} };
 
@@ -54,13 +58,12 @@ public class GameUtil {
 	}
 
 	// to do -> undo
-	// return val 0 : win , -1 : error, 1 : tie
 	public int makeMove(Integer currentMove, PlayerType currentPlayer) {
 		String inputValidationRegex = "[1-9]{1}";
 		
 		if (allMoves.contains(currentMove) 
 				|| !currentMove.toString().matches(inputValidationRegex)) {
-			return -1;
+			return INVALID_MOVE;
 		}
 
 		allMoves.add(currentMove);
@@ -94,7 +97,12 @@ public class GameUtil {
 				return PLAYER_WINS;
 			}
 		}
-		//to do tie -> moves size == 9
-		return 1;
+
+		if (this.allMoves.size() == 9) {
+			return NOBODY_WINS;
+		}
+		
+		return CONTINUE;
+		
 	}
 }
