@@ -17,7 +17,7 @@ public class GameController {
 		this.gameBoard = gameBoard;
 	}
 	
-	public void init() {
+	private void init() {
 		gameUtil.setPlayerChar();
 		gameUtil.setCpuChar();
 

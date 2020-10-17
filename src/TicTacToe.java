@@ -13,7 +13,6 @@ public class TicTacToe {
 		GameUtil gameUtil = new GameUtil(scanner);
 		GameController controller = new GameController(scanner, gameUtil, gameBoard);
 		
-		controller.init();
 		controller.start();
 	}
 }
