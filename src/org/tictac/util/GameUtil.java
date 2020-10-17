@@ -3,26 +3,59 @@ package org.tictac.util;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
+
+import org.tictac.view.PlayerType;
 
 public class GameUtil {
 	private final int PLAYER_WINS = 0;
-
 	private final int[][] winningMoves = { {1, 2, 3}, {1, 4, 7}, {1, 5, 9}, {2, 5, 8}, 
 			{3, 5, 7}, {3, 6, 9}, {4, 5, 6}, {7, 8, 9} };
 
-	private List<Integer> player1Moves;
-	private List<Integer> cpuMoves;
 	private List<Integer> allMoves;
+
+	private PlayerType player1;
+	private PlayerType cpu;
 	
-	public GameUtil() {
-		this.player1Moves = new ArrayList<>();
-		this.cpuMoves = new ArrayList<>();
+	private Scanner scanner;
+
+	public GameUtil(Scanner scanner) {
+		this.scanner = scanner;
 		this.allMoves = new ArrayList<>();
+	}
+	
+	public PlayerType getPlayer1() {
+		return player1;
+	}
+	
+	public PlayerType getCpu() {
+		return cpu;
+	}
+
+	public void setPlayerChar() {
+		while (true) {
+			System.out.println("Type x or o");
+			char playerChar = scanner.nextLine().toLowerCase().trim().charAt(0);
+
+			if (playerChar == 'x') {
+				this.player1 = PlayerType.X;
+				return;
+			}
+			
+			if (playerChar == 'o') {
+				this.player1 = PlayerType.O;
+				return;
+			}
+		}
+	}
+	
+	public void setCpuChar() {
+		this.cpu = this.player1 == PlayerType.X ? PlayerType.O : PlayerType.X;
 	}
 
 	// to do -> undo
 	// return val 0 : win , -1 : error, 1 : tie
-	public int makeMove(Integer currentMove, boolean cpuTurn) {
+	public int makeMove(Integer currentMove, PlayerType currentPlayer) {
 		String inputValidationRegex = "[1-9]{1}";
 		
 		if (allMoves.contains(currentMove) 
@@ -31,14 +64,9 @@ public class GameUtil {
 		}
 
 		allMoves.add(currentMove);
+		currentPlayer.add(currentMove);
 
-		if (cpuTurn) {
-			cpuMoves.add(currentMove);
-		} else {
-			player1Moves.add(currentMove);
-		}
-
-		return checkWinner();
+		return checkWinner(currentPlayer);
 	}
 
 	public int generateCpuMove() {
@@ -53,21 +81,16 @@ public class GameUtil {
 		}
 	}
 
-	public int checkWinner() {
+	public int checkWinner(PlayerType currentPlayer) {
+		
+		List<Integer> currentPlayerMoves = currentPlayer.getMoves();
 
 		for (int i = 0; i < winningMoves.length; i++) {
 
-			if (player1Moves.size() > 2
-					&& player1Moves.contains(winningMoves[i][0]) 
-					&& player1Moves.contains(winningMoves[i][1])
-					&& player1Moves.contains(winningMoves[i][2])) {
-				return PLAYER_WINS;
-			}
-
-			if (cpuMoves.size() > 2 
-					&& cpuMoves.contains(winningMoves[i][0])
-					&& cpuMoves.contains(winningMoves[i][1])
-					&& cpuMoves.contains(winningMoves[i][2])) {
+			if (currentPlayerMoves.size() > 2
+					&& currentPlayerMoves.contains(winningMoves[i][0]) 
+					&& currentPlayerMoves.contains(winningMoves[i][1])
+					&& currentPlayerMoves.contains(winningMoves[i][2])) {
 				return PLAYER_WINS;
 			}
 		}

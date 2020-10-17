@@ -9,8 +9,8 @@ public class TicTacToe {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		
-		GameUtil gameUtil = new GameUtil();
-		GameBoard gameBoard = new GameBoard(scanner);
+		GameBoard gameBoard = new GameBoard();
+		GameUtil gameUtil = new GameUtil(scanner);
 		GameController controller = new GameController(scanner, gameUtil, gameBoard);
 		
 		controller.init();

@@ -1,13 +1,8 @@
 package org.tictac.view;
 
-import java.util.Scanner;
-
 public class GameBoard {
-	private Scanner scanner;
 
 	private PlayerType currentChar;
-	private PlayerType player;
-	private PlayerType cpu;
 
 	private char[][] gameBoard = { 
 			{' ', '|', ' ', '|', ' '},
@@ -17,33 +12,8 @@ public class GameBoard {
 			{' ', '|', ' ', '|', ' '},
 	};
 	
-	public GameBoard(Scanner scanner) {
-		this.scanner = scanner;
-	}
-
-	public void setPlayerChar() {
-		while (true) {
-			System.out.println("Type x or o");
-			char playerChar = scanner.nextLine().toLowerCase().trim().charAt(0);
-
-			if (playerChar == 'x') {
-				this.player = PlayerType.X;
-				return;
-			}
-			
-			if (playerChar == 'o') {
-				this.player = PlayerType.O;
-				return;
-			}
-		}
-	}
-	
-	public void setCpuChar() {
-		this.cpu = this.player == PlayerType.X ? PlayerType.O : PlayerType.X;
-	}
-	
-	public void setCurrentChar(boolean cpuTurn) {
-		this.currentChar = cpuTurn ? this.cpu : this.player;
+	public void setCurrentChar(PlayerType current) {
+		this.currentChar = current == PlayerType.O ? PlayerType.X : PlayerType.O;
 	}
 
 	public void printGameBoard() {
