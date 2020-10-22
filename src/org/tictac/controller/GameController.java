@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import org.tictac.util.GameUtil;
 import org.tictac.view.GameBoard;
-import org.tictac.view.PlayerType;
 
 public class GameController {
 	private Scanner scanner;

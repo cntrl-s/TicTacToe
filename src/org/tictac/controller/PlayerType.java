@@ -1,4 +1,4 @@
-package org.tictac.view;
+package org.tictac.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,5 +19,4 @@ public enum PlayerType {
 	public void add(int move) {
 		this.moves.add(move);
 	}
-
 }

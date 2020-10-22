@@ -1,5 +1,7 @@
 package org.tictac.view;
 
+import org.tictac.controller.PlayerType;
+
 public class GameBoard {
 
 	private char currentChar;

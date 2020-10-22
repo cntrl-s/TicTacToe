@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-import org.tictac.view.PlayerType;
+import org.tictac.controller.PlayerType;
 
 public class GameUtil {
 	public final static int PLAYER_WINS = 1;
