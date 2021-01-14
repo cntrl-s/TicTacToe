@@ -1,6 +1,4 @@
-package org.tictac.view;
-
-import org.tictac.controller.PlayerType;
+package org.eldi.tictactoe;
 
 public class GameBoard {
 

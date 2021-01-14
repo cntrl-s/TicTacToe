@@ -1,11 +1,9 @@
-package org.tictac.util;
+package org.eldi.tictactoe;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-
-import org.tictac.controller.PlayerType;
 
 public class GameUtil {
 	public final static int PLAYER_WINS = 1;
@@ -36,7 +34,7 @@ public class GameUtil {
 		return cpu;
 	}
 
-	public void setPlayerChar() {
+	public void setPlayerType() {
 		while (true) {
 			System.out.println("Type x or o");
 			char playerChar = scanner.nextLine().toLowerCase().trim().charAt(0);
@@ -57,7 +55,7 @@ public class GameUtil {
 		this.cpu = this.player1 == PlayerType.X ? PlayerType.O : PlayerType.X;
 	}
 
-	// to do -> undo
+	// TODO implement undo
 	public int makeMove(Integer currentMove, PlayerType currentPlayer) {
 		String inputValidationRegex = "[1-9]{1}";
 		
@@ -67,7 +65,7 @@ public class GameUtil {
 		}
 
 		allMoves.add(currentMove);
-		currentPlayer.add(currentMove);
+		currentPlayer.addMove(currentMove);
 
 		return checkWinner(currentPlayer);
 	}

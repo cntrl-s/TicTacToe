@@ -1,23 +1,20 @@
-package org.tictac.controller;
+package org.eldi.tictactoe;
 
 import java.util.Scanner;
 
-import org.tictac.util.GameUtil;
-import org.tictac.view.GameBoard;
-
-public class GameController {
+public class Controller {
 	private Scanner scanner;
 	private GameUtil gameUtil;
 	private GameBoard gameBoard;
 
-	public GameController(Scanner scanner, GameUtil util, GameBoard gameBoard) {
+	public Controller(Scanner scanner, GameUtil util, GameBoard gameBoard) {
 		this.scanner = scanner;
 		this.gameUtil = util;
 		this.gameBoard = gameBoard;
 	}
 	
 	private void init() {
-		gameUtil.setPlayerChar();
+		gameUtil.setPlayerType();
 		gameUtil.setCpuChar();
 
 		gameBoard.printGameBoard();
@@ -27,7 +24,7 @@ public class GameController {
 		this.init();
 
 		while (true) {
-			//handle numformatexcept
+			//TODO handle numformatexcept
 			int player1Move = Integer.valueOf(scanner.nextLine());
 
 			PlayerType player1 = gameUtil.getPlayer1();

@@ -1,8 +1,6 @@
-import java.util.Scanner;
+package org.eldi.tictactoe;
 
-import org.tictac.controller.GameController;
-import org.tictac.util.GameUtil;
-import org.tictac.view.GameBoard;
+import java.util.Scanner;
 
 public class TicTacToe {
 
@@ -11,7 +9,7 @@ public class TicTacToe {
 		
 		GameBoard gameBoard = new GameBoard();
 		GameUtil gameUtil = new GameUtil(scanner);
-		GameController controller = new GameController(scanner, gameUtil, gameBoard);
+		Controller controller = new Controller(scanner, gameUtil, gameBoard);
 		
 		controller.start();
 	}
